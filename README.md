@@ -1,6 +1,6 @@
 # DistributedBlend
 DistributedBlend is a association of scripts designed to render multiple Blender files on multiple GPUs with the click of a button.
-Blender is a open source 3D creation package. I created this project because I needed a fast and easy way to render a lot of scenes for a personal ainmation project.
+Blender is a open source 3D creation package. I created this project because I needed a fast and easy way to render a lot of scenes for a personal animation project.
 More info : https://blender.org
 
 ## How it works
