@@ -24,7 +24,7 @@ import sys
 
 from utils import *
 
-blenderPath  = "/home/scott/Téléchargements/Blender/blender"
+blenderPath  = "/foo/bar/blender" #path to the executable
 renderScript = "./autorender.py"
 jobsFile     = "./jobs"
 logFile      = "./log"
