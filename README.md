@@ -1,7 +1,7 @@
 # DistributedBlend
-DistributedBlend is a association of scripts designed to render multiple blender files on multiple GPUs with the click of a button.
+DistributedBlend is a association of scripts designed to render multiple Blender files on multiple GPUs with the click of a button.
 Blender is a open source 3D creation package. I created this project because I needed a fast and easy way to render a lot of scenes for a personal ainmation project.
-More infos : http://blender.org
+More info : https://blender.org
 
 ## How it works
 It uses a file name *jobs*, by default in the same folder as the scripts, wich contains the blender files that need to be rendered.
@@ -9,7 +9,7 @@ The file *add_job.py* is used to add jobs to that list quickly.
 You can make it even quicker by adding the script to your contextual menu. You just have to pass %f as a parameter to the script.
 See http://askubuntu.com/questions/21953/how-do-i-customize-the-context-menu-in-nautilus for help.
 
-Jobs can be removes the same way with the *remove_job.py* script.
+Jobs can be removed the same way with the *remove_job.py* script.
 
 Once the jobs file is filled, you start the farm with *farm.sh*. That script will lauch the *farm.py* file 4 times.
 Why 4 ? Because I have 4 GPUs.
@@ -20,7 +20,7 @@ Any errors generated from the subprocess will be written to the *log* file, loca
 (many other things are logged : added jobs, removed jobs, farms started, farms stopped, renders started, renders finished).
 
 The *autorender.py* script is responsable for the blender configuration and rendering. It takes a GPU id as a parameter, this time in blender oder (wich for some reasons is different from the system's order).
-It sets different parametters for rendering and lauches the render, the most important ones beeing :
+It sets different parametters for rendering and lauches the render, the most important ones being :
 ```python
 bpy.context.scene.render.use_overwrite = False
 bpy.context.scene.render.use_placeholder = True
