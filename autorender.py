@@ -29,18 +29,24 @@ for i in range(4):
         bpy.context.user_preferences.addons['cycles'].preferences.get_devices()[0][i].use = True
     else:
         bpy.context.user_preferences.addons['cycles'].preferences.get_devices()[0][i].use = False
-        
-renderFolder = "/foo/bar"
+
+#getting when the farm started to name the render folder accordingly
+for arg in sys.argv:
+    if arg == "-t":
+        farmStartTime = sys.argv[sys.argv.index("-t")+1]
+
+
+renderFolder = "/render/folder/"
 filePath = bpy.data.filepath
 fileFolder = filePath.split("/")[-2]
-fileName = filePath.split("/")[-1].split(".")[0]
+fileName = filePath.split("/")[-1].split(".blend")[0]
 
 
 '''OPTIONS'''
 #file type
 bpy.context.scene.render.image_settings.file_format = "PNG"
 #set render path
-bpy.context.scene.render.filepath = renderFolder+"/"+fileFolder+"/"+fileName
+bpy.context.scene.render.filepath = renderFolder+"/"+fileFolder+"/"+fileName+"_"+farmStartTime+"/"+fileName+"-"
 #if a frame already exists, don't re-render it
 bpy.context.scene.render.use_overwrite = False
 #if you started rendering a frame, make an empty file for it so that other notes know you're taking care of it
