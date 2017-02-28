@@ -23,8 +23,12 @@ import subprocess
 import sys
 
 from utils import *
+from datetime import datetime
 
-blenderPath  = "/foo/bar/blender" #path to the executable
+startTime = str(datetime.now()).split(":")[0].replace(" ", "_")
+Log("FARM STARTED")
+
+blenderPath  = "/path/to/blender" #path to the executable
 renderScript = "./autorender.py"
 jobsFile     = "./jobs"
 logFile      = "./log"
@@ -44,8 +48,6 @@ else:
                 3 : 1,
             }.get(int(arg)))
 
-Log("FARM STARTED")
-
 print("found",len(GetJobs()),"jobs")
 
 #while there are jobs in the file, we get a new job
@@ -57,7 +59,7 @@ while len(GetJobs()) > 0:
 
     #command to render a blender file
     #TODO: better output formatting 
-    cmd = blenderPath+" -b "+job+" -P "+renderScript+" "+gpus+"| grep 'Path Tracing Tile\|skipping existing frame'"
+    cmd = blenderPath+" -b "+job+" -P "+renderScript+" -t "+startTime+" "+gpus+" | grep 'Path Tracing Tile\|skipping existing frame'"
     try:
         #running the command and checking for errors in the subprocess
         subprocess.run(cmd, shell=True, check=True,stderr=subprocess.PIPE,universal_newlines=True)

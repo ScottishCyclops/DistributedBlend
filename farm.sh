@@ -18,6 +18,12 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+resize -s 30 210 > /dev/null
+
+OCPATH="."
+
+$OCPATH/nvidia-fanspeed-high.sh > /dev/null
+$OCPATH/nvidia-overclock-blender.sh > /dev/null
 
 if (($# > 0))
 then
@@ -26,15 +32,25 @@ then
     then
         #if we wish to lauch multiple terminals (less responsive, but more readable)
         gnome-terminal -x sh -c "./farm.py 0; bash"
+        sleep .5
         gnome-terminal -x sh -c "./farm.py 1; bash"
+        sleep .5
         gnome-terminal -x sh -c "./farm.py 2; bash"
+        sleep .5
         gnome-terminal -x sh -c "./farm.py 3; bash"
 
+    elif [ $1 == '-l' ]
+    then
+        #low impact : we don't use the first GPU
+        ./farm.py 1 & sleep .5 & ./farm.py 2 & sleep .5 & ./farm.py 3 & wait
     else
-        echo "unknown argument. -m for multiple terminals"
+        echo "unknown argument. -m for multiple terminals, -l for low impact"
     fi
 else
     #otherwise, we lauch all the processes in the same terminal
     #and wait for them to finish
-    ./farm.py 0 & ./farm.py 1 & ./farm.py 2 & ./farm.py 3 & wait
+    ./farm.py 0 & sleep .5 & ./farm.py 1 & sleep .5 & ./farm.py 2 & sleep .5 & ./farm.py 3 & wait
 fi
+
+$OCPATH/nvidia-fanspeed-auto.sh > /dev/null
+$OCPATH/nvidia-overclock-default.sh > /dev/null
